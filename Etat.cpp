@@ -75,6 +75,7 @@ bool Etat3::transition(Automate &automate, Symbole *s) {
             cout << "Symbole récupéré en haut de la pile : " << Etiquettes[*topSymbole] << endl;
 
             Entier *val = dynamic_cast<Entier *>(topSymbole);
+            automate.popSymbole();
             if (!val) {
                 cerr << "Erreur : Symbole en haut de pile n'est pas un Entier." << endl;
                 return false;

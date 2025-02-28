@@ -42,7 +42,7 @@ void Automate::reduction(int n, Symbole *s) {
         pileSymboles.pop();
     }
     // Ajouter le nouveau symbole après la réduction
-    pileSymboles.push(s);
+    //pileSymboles.push(s);
     pileEtats.top()->transition(*this, s);
 }
 

@@ -15,6 +15,7 @@ public:
         if (!pileSymboles.empty()) return pileSymboles.top(); 
         return nullptr; 
     }
+    void popSymbole() { pileSymboles.pop(); }
     
 
 
