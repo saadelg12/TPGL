@@ -5,7 +5,7 @@ Symbole* Lexer::Consulter() {
     if (!tampon) {
         // Ignorer les espaces
         while (tete < flux.length() && flux[tete] == ' ') {
-            tete++;
+           tete++;
         }
 
         if (tete == flux.length()) {  // Fin du flux

@@ -11,8 +11,8 @@ bool Etat0::transition(Automate &automate, Symbole *s) {
         case OPENPAR:  // Une parenthèse ouvrante doit être décalée vers Etat2
             automate.decalage(s, new Etat2());
             break;
-        case EXPR:  // Une expression complète doit passer à Etat1
-            automate.decalage(s, new Etat1());
+        case EXPR:  // Une expression complète doit passer à Etat1 (final)
+            automate.transitionSimple(s, new Etat1());
             break;
         default:
             cerr << "Erreur syntaxique : caractère inattendu en Etat0." << endl;
@@ -20,6 +20,7 @@ bool Etat0::transition(Automate &automate, Symbole *s) {
     }
     return true;
 }
+
 
 
 // État 1 : Expression acceptée

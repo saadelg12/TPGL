@@ -10,15 +10,27 @@ void Automate::run() {
     
     while (running) {
         Symbole *s = lexer.Consulter();
-        lexer.Avancer();
-        
+        //lexer.Avancer();
+        cout << "Etat avant transition :" << pileEtats.top()->getNom() << endl;
+        cout << "Symbole :" << Etiquettes[*s] << endl;
+
         running = pileEtats.top()->transition(*this, s);
+
+        cout << "Etat après transition :" << pileEtats.top()->getNom() << endl;
     }
+}
+
+void Automate::transitionSimple(Symbole *s, Etat *e) {
+    pileSymboles.push(s);
+    pileEtats.push(e);
+
 }
 
 void Automate::decalage(Symbole *s, Etat *e) {
     pileSymboles.push(s);
     pileEtats.push(e);
+    lexer.Avancer();
+
 }
 
 void Automate::reduction(int n, Symbole *s) {
@@ -31,3 +43,5 @@ void Automate::reduction(int n, Symbole *s) {
 
     pileEtats.top()->transition(*this, s);
 }
+
+

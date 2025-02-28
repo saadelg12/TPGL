@@ -19,9 +19,9 @@ int main() {
             break;
         }
 
-
-        // === TEST DU LEXER ===
         /*
+        // === TEST DU LEXER ===
+        
         Lexer l(chaine);
         Symbole* s;
 
@@ -34,7 +34,6 @@ int main() {
 
         cout << "FIN" << endl; // Indique la fin du flux
         */
-
         
         // === TEST DE L'AUTOMATE ===
         Automate automate(chaine);
