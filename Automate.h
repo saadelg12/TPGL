@@ -11,6 +11,12 @@ public:
     void decalage(Symbole *s, Etat *e);
     void reduction(int n, Symbole *s);
     void transitionSimple(Symbole * s, Etat * e);
+    Symbole *getTopSymbole() { 
+        if (!pileSymboles.empty()) return pileSymboles.top(); 
+        return nullptr; 
+    }
+    
+
 
 private:
     stack<Symbole *> pileSymboles;

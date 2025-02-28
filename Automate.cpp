@@ -27,11 +27,12 @@ void Automate::transitionSimple(Symbole *s, Etat *e) {
 }
 
 void Automate::decalage(Symbole *s, Etat *e) {
+    cout << "Décalage du symbole : " << Etiquettes[*s] << endl;
     pileSymboles.push(s);
     pileEtats.push(e);
     lexer.Avancer();
-
 }
+
 
 void Automate::reduction(int n, Symbole *s) {
     for (int i = 0; i < n; i++) {
@@ -40,8 +41,10 @@ void Automate::reduction(int n, Symbole *s) {
         delete pileSymboles.top();
         pileSymboles.pop();
     }
-
+    // Ajouter le nouveau symbole après la réduction
+    pileSymboles.push(s);
     pileEtats.top()->transition(*this, s);
 }
+
 
 

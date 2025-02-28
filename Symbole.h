@@ -23,6 +23,19 @@ protected:
     int ident;
 };
 
+// Classe pour les expressions
+class Expression : public Symbole {
+    public:
+        Expression(int v) : Symbole(EXPR), valeur(v) {}
+        ~Expression() {}
+        virtual void Affiche() { Symbole::Affiche(); cout << "(" << valeur << ")"; }
+        int getValue() { return valeur; }
+    
+    protected:
+        int valeur;
+    };
+    
+
 // Classe pour les nombres entiers
 class Entier : public Symbole {
 public:
