@@ -6,7 +6,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11
 
 # Fichiers sources et objets
-SRC = main.cpp Lexer.cpp
+SRC = main.cpp Lexer.cpp Etat.cpp Automate.cpp
 OBJ = $(SRC:.cpp=.o)
 
 # Règle de compilation principale

@@ -1,12 +1,13 @@
 #include <iostream>
 #include "Lexer.h"
+#include "Automate.h"
 
 using namespace std;
 
 int main() {
     string chaine;
 
-    cout << "=== Analyseur Lexical (Lexer) ===" << endl;
+    cout << "=== Analyseur Lexical & Automate Syntaxique ===" << endl;
     cout << "Entrez une expression à analyser (ou tapez 'exit' pour quitter) :" << endl;
 
     while (true) {
@@ -14,10 +15,13 @@ int main() {
         getline(cin, chaine);
 
         if (chaine == "exit") {
-            cout << "Fermeture du lexer." << endl;
+            cout << "Fermeture du programme." << endl;
             break;
         }
 
+
+        // === TEST DU LEXER ===
+        /*
         Lexer l(chaine);
         Symbole* s;
 
@@ -29,6 +33,12 @@ int main() {
         }
 
         cout << "FIN" << endl; // Indique la fin du flux
+        */
+
+        
+        // === TEST DE L'AUTOMATE ===
+        Automate automate(chaine);
+        automate.run();
     }
 
     return 0;
