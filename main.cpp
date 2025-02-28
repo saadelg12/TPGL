@@ -38,6 +38,7 @@ int main() {
         // === TEST DE L'AUTOMATE ===
         Automate automate(chaine);
         automate.run();
+        
     }
 
     return 0;

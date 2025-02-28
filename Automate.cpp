@@ -38,8 +38,6 @@ void Automate::reduction(int n, Symbole *s) {
     for (int i = 0; i < n; i++) {
         delete pileEtats.top();
         pileEtats.pop();
-        delete pileSymboles.top();
-        pileSymboles.pop();
     }
     // Ajouter le nouveau symbole après la réduction
     pileSymboles.push(s);
