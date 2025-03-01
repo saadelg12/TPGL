@@ -35,13 +35,43 @@ void Automate::decalage(Symbole *s, Etat *e) {
 
 
 void Automate::reduction(int n, Symbole *s) {
+    // for (int i = 0; i < n; i++) {
+    //     delete pileEtats.top();
+    //     pileEtats.pop();
+    // }
+    // // Ajouter le nouveau symbole après la réduction
+    // pileSymboles.push(s);
+    // pileEtats.top()->transition(*this, s);
+    stack<Symbole *> aEnlever;
     for (int i = 0; i < n; i++) {
-        delete pileEtats.top();
+        delete (pileEtats.top());
         pileEtats.pop();
-    }
-    // Ajouter le nouveau symbole après la réduction
-    pileSymboles.push(s);
-    pileEtats.top()->transition(*this, s);
+        aEnlever.push(pileSymboles.top());
+        pileSymboles.pop();
+      }
+    
+      int val;
+    
+      if (n == 1) {
+        val = ((Entier *)aEnlever.top())->getValue();
+      } else if (n == 3) {
+        if (*aEnlever.top() == OPENPAR) {
+          aEnlever.pop();
+          val = ((Expression *)aEnlever.top())->getValue();
+        } else {
+          val = ((Expression *)aEnlever.top())->getValue();
+          aEnlever.pop();
+          if (*aEnlever.top() == MULT) {
+            aEnlever.pop();
+            val = val * ((Expression *)aEnlever.top())->getValue();
+          } else {
+            aEnlever.pop();
+            val = val + ((Expression *)aEnlever.top())->getValue();
+          }
+        }
+      }
+    
+      pileEtats.top()->transition(*this, new Expression(val));
 }
 
 

@@ -26,13 +26,30 @@ protected:
 // Classe pour les expressions
 class Expression : public Symbole {
     public:
+        // Constructeur pour une expression simple (ex: E → val)
         Expression(int v) : Symbole(EXPR), valeur(v) {}
+
+        // Constructeur pour une expression composée (ex: E → E + E ou E * E)
+        Expression(Expression* gauche, Expression* droite, char op) : Symbole(EXPR) {
+            if (op == '+') {
+                valeur = gauche->getValue() + droite->getValue();
+            } else if (op == '*') {
+                valeur = gauche->getValue() * droite->getValue();
+            }
+
+            // Libération de la mémoire des sous-expressions après calcul
+            delete gauche;
+            delete droite;
+        }
         ~Expression() {}
         virtual void Affiche() { Symbole::Affiche(); cout << "(" << valeur << ")"; }
         int getValue() { return valeur; }
     
     protected:
         int valeur;
+        Expression* gauche = nullptr;
+        Expression* droite = nullptr;
+        char operateur;  // '+' pour addition, '*' pour multiplication
     };
     
 
