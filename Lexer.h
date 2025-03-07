@@ -10,7 +10,7 @@ public:
     Lexer(string s) : flux(s), tete(0), tampon(nullptr) {}
     ~Lexer() {
         // On évite de détruire deux fois le symbole FIN :
-        if (tampon && *tampon != FIN) delete tampon;
+        if (tampon ) delete tampon;
     }
 
     Symbole* Consulter();  // Récupère le prochain token sans avancer

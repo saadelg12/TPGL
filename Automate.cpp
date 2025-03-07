@@ -123,6 +123,9 @@ void Automate::reduction(int n, Symbole *s) {
         }
 
         cout << "[DEBUG] Valeur obtenue après réduction : " << val << endl;
+        delete s1;
+        delete s2;
+        delete s3;
     }
 
     // Debug : on affiche la valeur qu’on a calculée
