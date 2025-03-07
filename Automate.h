@@ -8,19 +8,15 @@ class Automate {
 public:
     Automate(string flux);
     void run();
+
     void decalage(Symbole *s, Etat *e);
     void reduction(int n, Symbole *s);
-    void transitionSimple(Symbole * s, Etat * e);
-    Symbole *getTopSymbole() { 
-        if (!pileSymboles.empty()) return pileSymboles.top(); 
-        return nullptr; 
-    }
-    void popSymbole() { pileSymboles.pop(); }
-    
+    void transitionSimple(Symbole *s, Etat *e);
 
+    Expression* getResult();
 
 private:
     stack<Symbole *> pileSymboles;
-    stack<Etat *> pileEtats;
-    Lexer lexer;
+    stack<Etat *>    pileEtats;
+    Lexer            lexer;
 };
