@@ -7,6 +7,7 @@
 class Automate {
 public:
     Automate(string flux);
+    ~Automate();
     void run();
 
     void decalage(Symbole *s, Etat *e);

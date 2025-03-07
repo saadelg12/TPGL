@@ -6,6 +6,20 @@ Automate::Automate(string flux) : lexer(flux) {
     pileEtats.push(new Etat0());
 }
 
+Automate::~Automate() {
+    // Vider la pile des états
+    while (!pileEtats.empty()) {
+        delete pileEtats.top();
+        pileEtats.pop();
+    }
+    // Vider la pile des symboles
+    while (!pileSymboles.empty()) {
+        delete pileSymboles.top();
+        pileSymboles.pop();
+    }
+}
+
+
 void Automate::run() {
     bool running = true;
     
@@ -43,6 +57,7 @@ void Automate::reduction(int n, Symbole *s) {
     stack<Symbole *> aEnlever;
 
     for (int i = 0; i < n; i++) {
+        delete pileEtats.top();
         pileEtats.pop();
 
         // Récupérer le symbole au sommet de la pile
@@ -124,6 +139,7 @@ void Automate::reduction(int n, Symbole *s) {
     // Libérer la mémoire des symboles «aEnlever» (ils ont servi pour l’analyse)
     // Sauf si on veut en garder un, mais ici on a déjà remonté la valeur 
     while (!aEnlever.empty()) {
+        delete aEnlever.top();
         aEnlever.pop();
     }
 }
