@@ -21,6 +21,7 @@ inline string getSymbolCharacter(int ident) {
         case CLOSEPAR: return ")"; 
         case FIN: return "fin d'expression"; 
         case INT: return "val"; 
+        case EXPR: return "expression"; 
         default: return "inconnu"; 
     }
 }

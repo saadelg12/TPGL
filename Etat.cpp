@@ -47,25 +47,8 @@ bool Etat1::transition(Automate &automate, Symbole *s)
         return false;  // Fin de l'expression acceptée
     default:
         cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " '+' ; '*' ; 'fin d'expression' .";
         cerr << endl;
         return false;
     }
@@ -95,26 +78,9 @@ bool Etat2::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat6());
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 2] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " 'val' ; '(' .";
         cerr << endl;
         return false;
     }
@@ -141,26 +107,9 @@ bool Etat3::transition(Automate &automate, Symbole *s)
         automate.reduction(1);
         return true;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 3] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
         return false;
     }
@@ -189,26 +138,9 @@ bool Etat4::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat7());
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 4] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " 'val' ; '(' .";
         cerr << endl;
         return false;
     }
@@ -237,26 +169,9 @@ bool Etat5::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat8());
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 5] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " 'val' ; '(' .";
         cerr << endl;
         return false;
     }
@@ -285,26 +200,9 @@ bool Etat6::transition(Automate &automate, Symbole *s)
         automate.decalage(s, new Etat9());
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 6] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " '+' ; '*' ; ')' .";
         cerr << endl;
         return false;
     }
@@ -334,26 +232,9 @@ bool Etat7::transition(Automate &automate, Symbole *s)
         automate.decalage(s, new Etat5());
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 7] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
         return false;
     }
@@ -381,26 +262,9 @@ bool Etat8::transition(Automate &automate, Symbole *s)
         //cout << "Réduction faite par la règle 3 en Etat8" << endl;
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 8] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
         return false;
     }
@@ -425,26 +289,9 @@ bool Etat9::transition(Automate &automate, Symbole *s) {
         automate.reduction(3);
         break;
     default:
-        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
-        if (lastSymbolStr == "début de l'expression") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "(") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "+") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == "*") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " 'val' ; '(' .";
-        } else if (lastSymbolStr == ")") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        } else if (lastSymbolStr == "val") {
-            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
-            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
-        }
+        cerr << "Erreur syntaxique : [En Etat 9] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+        cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
         return false;
     }
