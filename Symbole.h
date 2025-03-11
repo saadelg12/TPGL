@@ -13,6 +13,19 @@ const string Etiquettes[] = {
     "OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "EXPR", "ERREUR"
 };
 
+inline string getSymbolCharacter(int ident) {
+    switch (ident) {
+        case PLUS: return "+"; 
+        case MULT: return "*"; 
+        case OPENPAR: return "("; 
+        case CLOSEPAR: return ")"; 
+        case FIN: return "fin d'expression"; 
+        case INT: return "val"; 
+        default: return "inconnu"; 
+    }
+}
+
+
 // Classe de base pour un symbole
 class Symbole {
 public:
@@ -53,7 +66,7 @@ public:
     }
 
     int getValue() { 
-        cout << "[DEBUG] getValue() appelé sur Expression: " << valeur << endl;
+        //cout << "[DEBUG] getValue() appelé sur Expression: " << valeur << endl;
         return valeur; 
     }
     

@@ -5,7 +5,7 @@
 // État 0 : État initial
 bool Etat0::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat0 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat0 avec symbole : " << Etiquettes[*s] << endl;
 
     switch (*s)
     {
@@ -19,7 +19,8 @@ bool Etat0::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat1());
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat0." << endl;
+    cerr << "Erreur syntaxique : [En Etat 0] caractère '" << getSymbolCharacter(*s) << "' inattendu." << endl;
+    cerr << "Assurez-vous de bien entrer 'val' ou '(' en début d'expression." << endl;
         return false;
     }
     return true;
@@ -28,7 +29,11 @@ bool Etat0::transition(Automate &automate, Symbole *s)
 // État 1 : Expression acceptée
 bool Etat1::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat1 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat1 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
 
     switch (*s)
     {
@@ -39,20 +44,44 @@ bool Etat1::transition(Automate &automate, Symbole *s)
         automate.decalage(s, new Etat5());
         break;
     case FIN:
-        cout << "Expression reconnue !" << endl;
-        // Ici on renvoie false pour sortir de la boucle de run()
-        return false;
+        return false;  // Fin de l'expression acceptée
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat1." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
 }
 
+
+
 // État 2 : '('
 bool Etat2::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat2 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat2 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
 
     switch (*s)
     {
@@ -66,7 +95,27 @@ bool Etat2::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat6());
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu après '('." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
@@ -75,7 +124,12 @@ bool Etat2::transition(Automate &automate, Symbole *s)
 // État 3 : Entier
 bool Etat3::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat3 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat3 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -84,18 +138,44 @@ bool Etat3::transition(Automate &automate, Symbole *s)
     case CLOSEPAR:
     case FIN:
         // Réduction de 1 élément : E → valeur entière
-        automate.reduction(1, nullptr);
+        automate.reduction(1);
         return true;
     default:
-        cerr << "Erreur syntaxique après un entier." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
+    return true;
 }
 
 // État 4 : après un '+' on attend une autre EXPR
 bool Etat4::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat4 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat4 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -109,7 +189,27 @@ bool Etat4::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat7());
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat4." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
@@ -118,7 +218,12 @@ bool Etat4::transition(Automate &automate, Symbole *s)
 // État 5 : après un '*' on attend une autre EXPR
 bool Etat5::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat5 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat5 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -132,7 +237,27 @@ bool Etat5::transition(Automate &automate, Symbole *s)
         automate.transitionSimple(s, new Etat8());
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat5." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
@@ -141,7 +266,12 @@ bool Etat5::transition(Automate &automate, Symbole *s)
 // État 6 : après '(' on a obtenu un EXPR
 bool Etat6::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat6 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat6 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -155,7 +285,27 @@ bool Etat6::transition(Automate &automate, Symbole *s)
         automate.decalage(s, new Etat9());
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat6." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
@@ -164,7 +314,12 @@ bool Etat6::transition(Automate &automate, Symbole *s)
 // État 7 : après avoir décodé EXPR suite à un '+'
 bool Etat7::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat7 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat7 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -172,14 +327,34 @@ bool Etat7::transition(Automate &automate, Symbole *s)
     case CLOSEPAR:
     case FIN:
         // Réduction de 3 éléments : E → E + E
-        automate.reduction(3, nullptr);
-        cout << "Réduction faite par la règle 2 en Etat7" << endl;
+        automate.reduction(3);
+        //cout << "Réduction faite par la règle 2 en Etat7" << endl;
         break;
     case MULT:
         automate.decalage(s, new Etat5());
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat7." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
@@ -188,7 +363,12 @@ bool Etat7::transition(Automate &automate, Symbole *s)
 // État 8 : après avoir décodé EXPR suite à un '*'
 bool Etat8::transition(Automate &automate, Symbole *s)
 {
-    cout << "Transition en Etat8 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat8 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -197,18 +377,43 @@ bool Etat8::transition(Automate &automate, Symbole *s)
     case CLOSEPAR:
     case FIN:
         // Réduction de 3 éléments : E → E * E
-        automate.reduction(3, nullptr);
-        cout << "Réduction faite par la règle 3 en Etat8" << endl;
+        automate.reduction(3);
+        //cout << "Réduction faite par la règle 3 en Etat8" << endl;
         break;
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat8." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;
 }
 
 bool Etat9::transition(Automate &automate, Symbole *s) {
-    cout << "Transition en Etat9 avec symbole : " << Etiquettes[*s] << endl;
+    //cout << "Transition en Etat9 avec symbole : " << Etiquettes[*s] << endl;
+
+    // Récupération du dernier symbole empilé pour affichage
+    Symbole* lastSymbol = automate.getLastSymbol();
+    string lastSymbolStr = lastSymbol ? getSymbolCharacter((int)*lastSymbol) : "début de l'expression";
+
 
     switch (*s)
     {
@@ -216,12 +421,31 @@ bool Etat9::transition(Automate &automate, Symbole *s) {
     case MULT:
     case CLOSEPAR:
     case FIN:  // <-- On autorise la réduction si la fin survient juste après ')'
-        cout << "[DEBUG] Réduction dans Etat9 (E → ( E ))" << endl;
-        automate.reduction(3, nullptr);
+        //cout << "[DEBUG] Réduction dans Etat9 (E → ( E ))" << endl;
+        automate.reduction(3);
         break;
-
     default:
-        cerr << "Erreur syntaxique : caractère inattendu en Etat9." << endl;
+        cerr << "Erreur syntaxique : [En Etat 1] caractère '" << getSymbolCharacter((int)*s) << "' inattendu." << endl;
+        if (lastSymbolStr == "début de l'expression") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "(") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "+") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == "*") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " 'val' ; '(' .";
+        } else if (lastSymbolStr == ")") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        } else if (lastSymbolStr == "val") {
+            cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
+            cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
+        }
+        cerr << endl;
         return false;
     }
     return true;

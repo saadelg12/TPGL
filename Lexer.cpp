@@ -34,13 +34,13 @@ Symbole* Lexer::Consulter() {
                 if (isdigit(c)) {
                     int resultat = c - '0';
                     int i = 1;
-                    while (tete + i < flux.length() && isdigit(flux[tete + i])) {
+                    while (tete + i < (int) flux.length() && isdigit(flux[tete + i])) {
                         resultat = resultat * 10 + (flux[tete + i] - '0');
                         i++;
                     }
                     tete += i;
                     tampon = new Entier(resultat);
-                    cout << "[LEXER] Créé Entier(" << resultat << ")" << endl;
+                    //cout << "[LEXER] Créé Entier(" << resultat << ")" << endl;
                 } else {
                     cerr << "Erreur lexicale : caractère invalide '" << c << "'\n";
                     tampon = new Symbole(ERREUR);

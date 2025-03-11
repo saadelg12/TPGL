@@ -29,7 +29,7 @@ int main() {
         if (resultat) {
             cout << "Résultat de l'expression : " << resultat->getValue() << endl;
         } else {
-            cout << "Aucun résultat disponible (expression invalide ?)" << endl;
+            cout << "Aucun résultat disponible (expression invalide)" << endl;
         }
     }
 
