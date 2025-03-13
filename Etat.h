@@ -12,7 +12,9 @@ public:
     Etat(string nom) : etatNom(nom) {}
     virtual ~Etat() {}
 
-    virtual bool transition(Automate &automate, Symbole *s) = 0;
+    virtual bool transition(Automate &automate, Symbole *s) {
+        return false; // Comportement par défaut
+    }
     string getNom() const { return etatNom; }
 
 protected:
@@ -78,4 +80,8 @@ class Etat9 : public Etat {
 public:
     Etat9() : Etat("E9") {}
     bool transition(Automate &automate, Symbole *s) override;
+};
+class Etat10 : public Etat {
+    public:
+        Etat10() : Etat("E10") {}
 };

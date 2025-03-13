@@ -50,6 +50,7 @@ bool Etat1::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; 'fin d'expression' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -82,6 +83,7 @@ bool Etat2::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " 'val' ; '(' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -111,6 +113,7 @@ bool Etat3::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
+        automate.transitionSimple(s, new Etat10());
         return false;
     }
     return true;
@@ -142,6 +145,7 @@ bool Etat4::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " 'val' ; '(' .";
         cerr << endl;
+        automate.transitionSimple(s, new Etat10());
         return false;
     }
     return true;
@@ -173,6 +177,7 @@ bool Etat5::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " 'val' ; '(' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -204,6 +209,7 @@ bool Etat6::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; ')' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -236,6 +242,7 @@ bool Etat7::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -266,6 +273,7 @@ bool Etat8::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -293,9 +301,9 @@ bool Etat9::transition(Automate &automate, Symbole *s) {
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
 }
-
 

@@ -1,7 +1,7 @@
 #include "Automate.h"
 #include <iostream>
 
-Automate::Automate(string flux) : lexer(flux) {
+Automate::Automate(string flux) : lexer(flux){
     // On empile l'état initial
     pileEtats.push(new Etat0());
 }
@@ -154,10 +154,13 @@ void Automate::reduction(int n) {
 Expression* Automate::getResult() {
     // On regarde le symbole au sommet de la pile
     if (!pileSymboles.empty()) {
-        Expression* expr = dynamic_cast<Expression*>(pileSymboles.top());
-        if (expr) {
+        Symbole * s = dynamic_cast<Symbole*> (pileSymboles.top());
+        if(*s == EXPR){
+            Expression* expr = dynamic_cast<Expression*>(s);
             return expr;
         }
     }
     return nullptr;
 }
+
+
