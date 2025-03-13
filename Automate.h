@@ -22,6 +22,12 @@ public:
         }
         return nullptr;  // Retourne nullptr si la pile est vide
     }
+    Etat* getLastState() {
+        if (!pileEtats.empty()) {
+            return pileEtats.top();  // Retourne le dernier symbole empilé
+        }
+        return nullptr;  // Retourne nullptr si la pile est vide
+    }
 
 private:
     stack<Symbole *> pileSymboles;

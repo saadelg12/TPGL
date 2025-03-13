@@ -25,8 +25,10 @@ int main() {
         automate.run();
 
         // Récupérer l’éventuel résultat :
-        Expression* resultat = automate.getResult();
-        if (resultat) {
+        
+        Etat * e = automate.getLastState();
+        if ( e && e->getNom() !="E10") {
+            Expression* resultat = automate.getResult();
             cout << "Résultat de l'expression : " << resultat->getValue() << endl;
         } else {
             cout << "Aucun résultat disponible (expression invalide)" << endl;

@@ -154,9 +154,8 @@ void Automate::reduction(int n) {
 Expression* Automate::getResult() {
     // On regarde le symbole au sommet de la pile
     if (!pileSymboles.empty()) {
-        Symbole * s = dynamic_cast<Symbole*> (pileSymboles.top());
-        if(*s == EXPR){
-            Expression* expr = dynamic_cast<Expression*>(s);
+        Expression* expr = dynamic_cast<Expression*>(pileSymboles.top());
+        if (expr) {
             return expr;
         }
     }

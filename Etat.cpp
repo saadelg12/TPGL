@@ -21,6 +21,7 @@ bool Etat0::transition(Automate &automate, Symbole *s)
     default:
     cerr << "Erreur syntaxique : [En Etat 0] caractère '" << getSymbolCharacter(*s) << "' inattendu." << endl;
     cerr << "Assurez-vous de bien entrer 'val' ou '(' en début d'expression." << endl;
+    automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -113,7 +114,7 @@ bool Etat3::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " '+' ; '*' ; ')' ; 'fin d'expression' .";
         cerr << endl;
-        automate.transitionSimple(s, new Etat10());
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -145,7 +146,7 @@ bool Etat4::transition(Automate &automate, Symbole *s)
         cerr << "Rappel : Les symboles possibles après '"<< lastSymbolStr << "' sont" ;
         cerr << " 'val' ; '(' .";
         cerr << endl;
-        automate.transitionSimple(s, new Etat10());
+        automate.decalage(s, new Etat10());
         return false;
     }
     return true;
@@ -305,5 +306,12 @@ bool Etat9::transition(Automate &automate, Symbole *s) {
         return false;
     }
     return true;
+}
+
+bool Etat10::transition(Automate &automate, Symbole *s)
+{
+    (void)automate; // Indique que ce paramètre est intentionnellement inutilisé
+    (void)s;
+    return false;
 }
 
